@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Yogesh Munees">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+      integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Bentham|Playfair+Display|Raleway:400,500|Suranna|Trocchi" rel="stylesheet">
+    <script src="./components/navbar.js"></script>
+    <link rel="stylesheet" href="./css/profile.css">
+    <script src="./components/profile.js"></script>
+    <link rel="stylesheet" href="./css/indexfooter.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class='navbar-container'>
+                <a href="#" class="navbar-logo">OBS</a>
+                <div class='menu-icon' onclick="navbarChange()">
+                  <i class="fa-sharp fa-light fa-bars" style="color: #fff; font-size: 14px;">MENU</i>
+                </div>
+                <!--<ul className={click ? 'nav-menu active' : 'nav-menu'}>-->
+                <!--<ul class="nav-menu active">-->
+                <ul id="ul" class="nav-menu">
+                  <li class="nav-item">
+                    <form method="POST" action="/mainpage" class="nav-item" style="margin-top: 0px;">
+                      <input type="hidden" name="name" value="value" /> 
+                      <a class="nav-links" onclick="this.parentNode.submit();">Auctions</a>
+                    </form>
+                  </li>
+                  <li class='nav-item'>
+                    <a class='nav-links'>Profile</a>
+                  </li>
+                  <li class='nav-item'>
+                    <a href="./index.html" onclick="scrollToSection('#Contact')" class='nav-links'>Log Out</a>
+                  </li>
+                </ul>
+              </div>
+        </div>
+    </header>
+    <div id="signupOverlay" class="overlay">
+      <span class="closebtn" onclick="closeForm()" title="Close Overlay"> &#215 </span>
+      <div id="updateProfile" class="wrap">
+        <h2 name="signUpText" id="sign-up-text">Update Profile</h2>
+        <form name="signup-form" id="signup-form" action="/update_profile" method="POST">
+          <input type="text" name="fname" id="fname" placeholder="Enter the First Name">
+          <input type="text" name="lname" id="lname" placeholder="Enter the Last Name">
+          <!--<input type="password" id="currentpassword" name="password" placeholder="Enter the Current Password">
+          <input type="password" id="newpassword" name="password" placeholder="Enter the New Password">-->
+          <input type="submit" id="submit-signup" value="Update">
+        </form>
+      </div>
+      <div id="auctionUpdate" class="wrap-new">
+        <h2 id="sign-up-text">Start Auction</h2>
+        <form name="auction-form" id="auction-form" action="/create_auction" method="POST">
+          <input name="auctionName" id="auctionName" type="text" placeholder="Enter the Auction Name">
+          <input name="sellerName" id="sellerName" type="text" placeholder="Enter the Seller Name">
+          <input name="description" id="description" type="text" placeholder="Enter the Description">
+          <input name="startAmount" id="startAmount" type="number" placeholder="Enter the Starting Bid Amount">
+          <input name="stepValue" id="stepValue" type="number" placeholder="Enter the Step Bid">
+          <input name="endDate" id="endDate" onfocus="(this.type='date')" placeholder="Enter the End Time">
+          <input type="submit" value="Start Auction">
+        </form>
+      </div>
+      <div id="recharge" class="wrap-new">
+        <h2 id="sign-up-text">Recharge</h2>
+        <form name="auction-form" id="auction-form" action="/recharge" method="POST">
+          <input name="amount" id="amount" type="number" placeholder="Enter the Amount">
+          <input type="submit" value="Recharge Now">
+        </form>
+      </div>
+      <div id="recentOrders" class="wrap-new">
+        <h2 id="sign-up-text">Your Auctions</h2>
+        <form name="auction-form" id="auction-form" action="/listAuctions" method="POST">
+          <input type="submit" value="View List">
+        </form>
+        <div id="recentOrdersDiv"></div>
+      </div>
+      <div id="wishList" class="wrap-new">
+        <h2 id="sign-up-text">Wish List</h2>
+        <div id="wishListDiv"></div>
+      </div>
+    </div>
+    <div class="bgcard">
+    <div class="maincard">
+      <div class="card">
+        <div class="top-container">
+          <div class="ml-3">
+              <h5 id="name" class="name"><%= fname %> <%= lname %></h5>
+              <p id="mail" class="mail"><%= email %></p>
+            </div>
+        </div>
+        <div class="mid">
+        <div class="middle-container d-flex justify-content-between align-items-center mt-3 p-2">
+          <div class="d-flex flex-column text-right mr-2">
+            <span class="current-balance">Current Balance:</span>
+            <span class="amount"><span class="dollar-sign"> ₹</span><%= balance %></span>
+          </div>
+        </div>
+        <div class="middle-container" onclick="openRecentOrders()">
+          <span class="recent-orders">Your Auctions</span>
+        </div>
+        <div class="middle-container" onclick="openWishList()">
+          <span class="wishlist">Wishlist</span>
+        </div>
+        <div class="middle-container" onclick="openUpdateForm()">
+          <span class="wishlist">Update Profile</span>
+        </div>
+        <div class="middle-container" onclick="openAuctionForm()">
+          <span class="wishlist">Start Auction</span>
+        </div>
+        <div class="middle-container" onclick="openRecharge()">
+          <span class="wishlist">Recharge</span>
+        </div>
+        <div class="middle-container" onclick="openRecharge()">
+          <span class="wishlist">Last Accessed: <%= last_accessed %></span>
+        </div>
+        <div class="middle-container" onclick="openRecharge()">
+          <span class="wishlist">Account Created On: <%= account_created %></span>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="Contact">
+    <div class='footer-container'>
+      <section class='footer-subscription'>
+        <p class='footer-subscription-heading'>
+          "Experience the thrill of the auction and win amazing items from the comfort of your home with our user-friendly and fair bidding system - join now!"
+        </p>
+        <p class='footer-subscription-text'>
+          Get your bid Now.
+        </p>
+      </section>
+      <div class='footer-links'>
+        <div class='footer-link-wrapper'>
+          <div class='footer-link-items'>
+            <h2>About Us</h2>
+            <a>Perfect Bidding Environment</a>
+            <a>Exceptional Customer Satisfaction</a>
+          </div>
+          <div class='footer-link-items'>
+            <h2>Authors</h2>
+            <a>Yogesh Munees E</a>
+            <a>Sri Aravind Bharathi</a>
+            <a>Sivanesan</a>
+          </div>
+        </div>
+        <div class='footer-link-wrapper'>
+          <div class='footer-link-items'>
+            <h2>Address</h2>
+            <a>CSE-B</a>
+            <a>SSN College of Engineering</a>
+          </div>
+          <div class='footer-link-items'>
+            <h2>Social Media</h2>
+            <a>boredom_slayer_1273</a>
+            <a>aravind.abbb_</a>
+            <a>sivanesan_20</a>
+          </div>
+        </div>
+      </div>
+      <section class='social-media'>
+        <div class='social-media-wrap'>
+          <small class='website-rights'>OBS © 2023</small>
+          <div class='social-icons'>
+            <a href="https://www.facebook.com" class='social-icon-link facebook'><i class='fab fa-facebook-f' ></i></a>
+            <a href="https://www.instagram.com" class='social-icon-link instagram'><i class='fab fa-instagram' ></i> </a>
+            <a href="https://www.youtube.com" class='social-icon-link youtube'><i class='fab fa-youtube' ></i></a>
+            <a href="https://www.twitter.com" class='social-icon-link twitter'><i class='fab fa-twitter' ></i></a>
+            <a href="https://www.linkedin.com" class='social-icon-link twitter'><i class='fab fa-linkedin' ></i></a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </footer>
+</body>
+</html>

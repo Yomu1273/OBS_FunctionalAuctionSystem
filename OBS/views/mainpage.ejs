@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Yogesh Munees">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBS</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/card.css">
+    <link href="https://fonts.googleapis.com/css?family=Bentham|Playfair+Display|Raleway:400,500|Suranna|Trocchi" rel="stylesheet">
+    <script src="./components/navbar.js"></script>
+    <script src="./components/mainpage.js"></script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class='navbar-container'>
+                <a href="#" class="navbar-logo">OBS</a>
+                <div class='menu-icon' onclick="navbarChange()">
+                  <i class="fa-sharp fa-light fa-bars" style="color: #fff; font-size: 14px;">MENU</i>
+                </div>
+                <ul id="ul" class="nav-menu">
+                  <li class='nav-item'>
+                    <a class='nav-links'>Auctions</a>
+                  </li>
+                  <li>
+                    <form method="POST" action="/profile" class='nav-item'>
+                      <input type="hidden" name="name" value="value" /> 
+                      <a class="nav-links" onclick="this.parentNode.submit();">Profile</a>
+                    </form>
+                  </li>
+                  <li class='nav-item'>
+                    <a href="./index.html" class='nav-links'>Log Out</a>
+                  </li>
+                </ul>
+              </div>
+        </div>
+    </header>
+    <div class='cards'>
+        <h1>Live Auctions!</h1>
+                <% auction.forEach(element => { %>
+                <div class="wrapper">
+                    <div class="product-img">
+                      <img src="./images/img-2.jpg" height="420" width="327">
+                    </div>
+                    <div class="product-info">
+                      <div class="product-text">
+                        <h1 id="auctionName"><%= element.auctionName %></h1>
+                        <h2 id="sellerName">By <%= element.sellerName %></h2>
+                        <p id="description" name="description">Description:<br><%= element.description %></p>
+                        <br>
+                        <p style="color:black">Step Bid:</p>
+                        <p id="stepBid" style="font-size: 20px;">₹<%= element.stepValue %></p><br>
+                        <p id="timeRemaining">Closes On:<br><%= new Date(element.endDate).toLocaleString() %></p>
+                      </div>
+                      <div class="product-price-btn">
+                        <p>₹<span id="theAmount"><%= element.startAmount %></span></p>
+                        <form method="POST" action="/place_bid" class='product-price-btn'>
+                          <input type="hidden" name="idname" value='<%= element._id %>'' /> 
+                          <button type="button" onclick="this.parentNode.submit();">Place Bid</button>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+                <% }) %>
+                <div id="mydiv" data-test="<%= errmsg %>"></div>
+        <p style="text-align: center;" onclick="moreAuctions()">Scroll to the Top</p>
+    </div>
+    <script>
+      var errmsg = document.getElementById('mydiv').dataset.test;
+      function showAlert(errmsg){
+  if(errmsg!=""){
+    if(errmsg=="The owner cannot Bid" || errmsg=="Insufficient Balance"){
+      alert(errmsg);
+    }
+  }
+}showAlert(errmsg);
+    </script>
+</body>
+</html>

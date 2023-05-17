@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Yogesh Munees">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bidding System</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+      integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/herocontainer.css">
+    <link rel="stylesheet" href="./css/about.css">
+    <link rel="stylesheet" href="./css/indexfooter.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class='navbar-container'>
+                <a href="#" class="navbar-logo">OBS</a>
+                <div class='menu-icon' onclick="navbarChange()">
+                  <i class="fa-sharp fa-light fa-bars" style="color: #fff; font-size: 14px;">MENU</i>
+                </div>
+                <!--<ul className={click ? 'nav-menu active' : 'nav-menu'}>-->
+                <!--<ul class="nav-menu active">-->
+                <ul id="ul" class="nav-menu">
+                  <li class='nav-item'>
+                    <a onclick="scrollToSection('#Home')" class='nav-links'>Home</a>
+                  </li>
+                  <li class='nav-item'>
+                    <a onclick="scrollToSection('#About')" class='nav-links'>About</a>
+                  </li>
+                  <li class='nav-item'>
+                    <a onclick="scrollToSection('#Contact')" class='nav-links'>Contact</a>
+                  </li>
+                  <li>
+                    <a onclick="openForm()" class='nav-links'>Sign Up</a>
+                  </li>
+                </ul>
+              </div>
+        </div>
+    </header>
+    <div id="signupOverlay" class="overlay">
+      <span class="closebtn" onclick="closeForm()" title="Close Overlay"> &#215 </span>
+      <div id="wrap" class="wrap">
+        <h2 name="signUpText" id="sign-up-text">Sign Up Here</h2>
+        <form name="signup-form" id="signup-form" action="/sign_up" method="POST" onsubmit="return validate()">
+          <input type="text" name="fname" placeholder="Enter the First Name" required>
+          <input type="text" name="lname" placeholder="Enter the Last Name">
+          <input type="text" name="username" placeholder="Enter the Username">
+          <input type="email" name="email" placeholder="Enter the Email" required>
+          <input type="password" id="password" name="password" placeholder="Enter the Password" required>
+          <input type="password" id="re-entry" placeholder="Re-enter the Password">
+          <label style="text-align: center;">Already have an account?  <a href="#" onclick="openLogin()">Login</a></label>
+          <input type="submit" id="submit-signup" value="Join Now">
+        </form>
+      </div>
+      <div id="wrap-new" class="wrap-new">
+        <h2 id="sign-up-text">Log In</h2>
+        <form name="login-form" id="login-form" action="/log_in" method="POST">
+          <input name="loginEmail" id="loginEmail" type="email" placeholder="Enter the Email" required>
+          <input name="loginPassword" id="loginPassword" type="password" placeholder="Enter the Password" required>
+          <label style="text-align: center;">Do not have an account?  <a href="#" onclick="openForm()">Sign Up</a></label>
+          <input type="submit" value="Sign In">
+        </form>
+      </div>
+    </div>
+    <section id="Home">
+      <div class='hero-container'>
+        <h1>TOP BIDDER ALERT</h1>
+        <p>What are you waiting for?</p>
+        <div class='hero-btns'>
+          <button class='btns' onclick="openForm()">
+            GET STARTED
+          </button>
+        </div>
+      </div>
+    </section>
+    <section id="About">
+      <div class='cards'>
+        <h1>ABOUT!</h1>
+        <div class='cards__container'>
+          <div class='cards__wrapper'>
+            <div class='cards__items'>
+              Welcome to our bidding system page! Our platform offers an exciting and convenient way to participate in online auctions and make your bids on various items from the comfort of your own home. Our user-friendly interface allows you to easily browse through a wide range of auction items and place your bids with just a few clicks.
+Our system is designed to ensure fair and transparent bidding, so you can bid with confidence knowing that you have a chance to win the auction. Our team is dedicated to providing exceptional customer service, and we are always available to answer any questions or concerns you may have.
+With our bidding system, you can participate in auctions for items ranging from electronics to fashion, and everything in between. Our platform is open 24/7, so you can bid whenever it's convenient for you. Plus, our system is designed to be secure and reliable, so you can trust that your personal information is safe and your bids are processed accurately.
+Thank you for choosing our bidding system. We look forward to helping you find great deals and win exciting auctions!
+            </div>
+          </div>
+        </div>
+      </div>
+    <footer id="Contact">
+      <div class='footer-container'>
+        <section class='footer-subscription'>
+          <p class='footer-subscription-heading'>
+            "Experience the thrill of the auction and win amazing items from the comfort of your home with our user-friendly and fair bidding system - join now!"
+          </p>
+          <p class='footer-subscription-text'>
+            Get your bid Now.
+          </p>
+        </section>
+        <div class='footer-links'>
+          <div class='footer-link-wrapper'>
+            <div class='footer-link-items'>
+              <h2>About Us</h2>
+              <a>Perfect Bidding Environment</a>
+              <a>Exceptional Customer Satisfaction</a>
+            </div>
+            <div class='footer-link-items'>
+              <h2>Authors</h2>
+              <a>Yogesh Munees E</a>
+              <a>Sri Aravind Bharathi</a>
+              <a>Sivanesan</a>
+            </div>
+          </div>
+          <div class='footer-link-wrapper'>
+            <div class='footer-link-items'>
+              <h2>Address</h2>
+              <a>CSE-B</a>
+              <a>SSN College of Engineering</a>
+            </div>
+            <div class='footer-link-items'>
+              <h2>Social Media</h2>
+              <a>boredom_slayer_1273</a>
+              <a>aravind.abbb_</a>
+              <a>sivanesan_20</a>
+            </div>
+          </div>
+        </div>
+        <section class='social-media'>
+          <div class='social-media-wrap'>
+            <small class='website-rights'>OBS © 2023</small>
+            <div class='social-icons'>
+              <a href="https://www.facebook.com" class='social-icon-link facebook'><i class='fab fa-facebook-f' ></i></a>
+              <a href="https://www.instagram.com" class='social-icon-link instagram'><i class='fab fa-instagram' ></i> </a>
+              <a href="https://www.youtube.com" class='social-icon-link youtube'><i class='fab fa-youtube' ></i></a>
+              <a href="https://www.twitter.com" class='social-icon-link twitter'><i class='fab fa-twitter' ></i></a>
+              <a href="https://www.linkedin.com" class='social-icon-link twitter'><i class='fab fa-linkedin' ></i></a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </footer>
+    <script src="./components/navbar.js"></script>
+    <script src="./components/indexFormValidation.js"></script>
+</body>
+</html>
